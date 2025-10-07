@@ -3,9 +3,12 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] private float damageAmount = 10f;
+    [SerializeField] private float hitWaitTime = 1f;
 
     private Rigidbody2D rb;
     private Transform playerTransform;
+    private float hitTimer = 0f;
 
     void Start()
     {
@@ -35,6 +38,21 @@ public class EnemyController : MonoBehaviour
         else
         {
             rb.linearVelocity = Vector2.zero;
+        }
+
+        if (hitTimer > 0f)
+        {
+            hitTimer -= Time.deltaTime;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && hitTimer <= 0f)
+        {
+            PlayerHealthController.instance.TakeDamage(damageAmount);
+
+            hitTimer = hitWaitTime;
         }
     }
 }

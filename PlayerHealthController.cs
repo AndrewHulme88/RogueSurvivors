@@ -2,16 +2,30 @@ using UnityEngine;
 
 public class PlayerHealthController : MonoBehaviour
 {
-    [SerializeField] private int maxHealth = 100;
+    public static PlayerHealthController instance;
 
-    private int currentHealth;
+    [SerializeField] private float maxHealth = 100f;
+
+    private float currentHealth;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
