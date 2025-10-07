@@ -16,5 +16,14 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         rb.linearVelocity = moveInput.action.ReadValue<Vector2>() * moveSpeed;
+
+        if (rb.linearVelocity.x < 0f)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+        else if (rb.linearVelocity.x > 0f)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
     }
 }
