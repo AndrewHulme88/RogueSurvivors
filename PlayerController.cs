@@ -7,14 +7,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
 
     private Rigidbody2D rb;
+    private Animator anim;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
     {
+        // Movement
         rb.linearVelocity = moveInput.action.ReadValue<Vector2>() * moveSpeed;
 
         if (rb.linearVelocity.x < 0f)
@@ -24,6 +27,19 @@ public class PlayerController : MonoBehaviour
         else if (rb.linearVelocity.x > 0f)
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+
+        // Animation
+        if(anim != null)
+        {
+            if(rb.linearVelocity != Vector2.zero)
+            {
+                anim.SetBool("isMoving", true);
+            }
+            else
+            {
+                anim.SetBool("isMoving", false);
+            }
         }
     }
 }
