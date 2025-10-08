@@ -13,11 +13,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        GameObject player = FindFirstObjectByType<PlayerController>()?.gameObject;
-        if (player != null)
-        {
-            playerTransform = player.transform;
-        }
+        playerTransform = PlayerHealthController.instance.transform;
     }
 
     void Update()
