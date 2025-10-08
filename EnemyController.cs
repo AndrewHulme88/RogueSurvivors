@@ -5,10 +5,13 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float damageAmount = 10f;
     [SerializeField] private float hitWaitTime = 1f;
+    [SerializeField] private float health = 5f;
+    [SerializeField] private float knockBackTime = 0.2f;
 
     private Rigidbody2D rb;
     private Transform playerTransform;
     private float hitTimer = 0f;
+    private float knockBackTimer = 0f;
 
     void Start()
     {
@@ -20,6 +23,21 @@ public class EnemyController : MonoBehaviour
     {
         if (playerTransform != null)
         {
+            if (knockBackTimer > 0f)
+            {
+                knockBackTimer -= Time.deltaTime;
+                
+                if(moveSpeed > 0f)
+                {
+                    moveSpeed = -moveSpeed * 2f;
+                }
+
+                if (knockBackTimer <= 0f)
+                {
+                    moveSpeed = -moveSpeed / 2f;
+                }
+            }
+
             Vector2 direction = (playerTransform.position - transform.position).normalized;
             rb.linearVelocity = direction * moveSpeed;
             if (rb.linearVelocity.x < 0f)
@@ -39,6 +57,26 @@ public class EnemyController : MonoBehaviour
         if (hitTimer > 0f)
         {
             hitTimer -= Time.deltaTime;
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        if (health <= 0f)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void TakeDamage(float damage, bool shouldKnockBack)
+    {
+        TakeDamage(damage);
+
+        if (shouldKnockBack)
+        {
+            knockBackTimer = knockBackTime;
+            
         }
     }
 

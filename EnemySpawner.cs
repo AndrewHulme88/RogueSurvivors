@@ -9,18 +9,19 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] Transform minSpawn;
     [SerializeField] Transform maxSpawn;
     [SerializeField] int checkPerFrame = 10;
+    [SerializeField] private float despawnDistanceValue = 5f;
 
     private float spawnTimer;
     private Transform playerTransform;
-    private float despawnDistance;
     private List<GameObject> spawnedEnemies = new List<GameObject>();
     private int enemyToCheck;
+    private float despawnDistance;
 
     private void Start()
     {
         spawnTimer = spawnInterval;
         playerTransform = PlayerHealthController.instance.transform;
-        despawnDistance = Vector3.Distance(minSpawn.position, maxSpawn.position) + 5f;
+        despawnDistance = Vector3.Distance(minSpawn.position, maxSpawn.position) + despawnDistanceValue;
     }
 
     private void Update()
@@ -36,7 +37,7 @@ public class EnemySpawner : MonoBehaviour
 
         int checkTarget = enemyToCheck + checkPerFrame;
 
-        while (checkTarget < checkPerFrame)
+        while (enemyToCheck < checkTarget)
         {
             if(enemyToCheck < spawnedEnemies.Count)
             {
@@ -58,6 +59,11 @@ public class EnemySpawner : MonoBehaviour
                     spawnedEnemies.RemoveAt(enemyToCheck);
                     checkTarget--;
                 }
+            }
+            else
+            {
+                enemyToCheck = 0;
+                checkTarget = 0;
             }
         }
     }
