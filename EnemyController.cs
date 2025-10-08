@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float hitWaitTime = 1f;
     [SerializeField] private float health = 5f;
     [SerializeField] private float knockBackTime = 0.2f;
+    [SerializeField] private int expAmount = 1;
 
     private Rigidbody2D rb;
     private Transform playerTransform;
@@ -66,6 +67,8 @@ public class EnemyController : MonoBehaviour
         if (health <= 0f)
         {
             Destroy(gameObject);
+
+            ExperienceLevelController.instance.SpawnExp(transform.position, expAmount);
         }
 
         DamageNumberController.instance.SpawnDamageNumber(damage, transform.position);

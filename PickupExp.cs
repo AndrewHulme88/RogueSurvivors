@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class PickupExp : MonoBehaviour
 {
-    [SerializeField] private int expAmount = 10;
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float timeBetweenChecks = 0.2f;
+
+    public int expAmount = 10;
 
     private bool isMovingToPlayer = false;
     private float checkTimer = 0f;

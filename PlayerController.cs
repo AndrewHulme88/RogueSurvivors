@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform sprite;
 
     public float moveSpeed = 5f;
-    public float pickupRange = 1.5f;
+    public float pickupRange = 1f;
 
     private Rigidbody2D rb;
     private Animator anim;
