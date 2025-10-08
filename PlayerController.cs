@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private InputActionReference moveInput;
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private Transform sprite;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -22,11 +23,11 @@ public class PlayerController : MonoBehaviour
 
         if (rb.linearVelocity.x < 0f)
         {
-            transform.localScale = new Vector3(1f, 1f, 1f);
+            sprite.transform.localScale = new Vector3(1f, 1f, 1f);
         }
         else if (rb.linearVelocity.x > 0f)
         {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
+            sprite.transform.localScale = new Vector3(-1f, 1f, 1f);
         }
 
         // Animation

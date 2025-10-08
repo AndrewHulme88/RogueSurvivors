@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealthController : MonoBehaviour
 {
     public static PlayerHealthController instance;
 
     [SerializeField] private float maxHealth = 100f;
+    [SerializeField] private Slider healthBarSlider;
 
     private float currentHealth;
 
@@ -23,6 +25,8 @@ public class PlayerHealthController : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
+        healthBarSlider.maxValue = maxHealth;
+        healthBarSlider.value = currentHealth;
     }
 
     public void TakeDamage(float damage)
@@ -34,6 +38,8 @@ public class PlayerHealthController : MonoBehaviour
         {
             Die();
         }
+
+        healthBarSlider.value = currentHealth;
     }
 
     private void Die()
