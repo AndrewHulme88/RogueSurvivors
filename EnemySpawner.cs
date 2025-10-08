@@ -6,7 +6,6 @@ using Unity.Jobs;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject enemyPrefab;
-    [SerializeField] private float spawnInterval = 3f;
     [SerializeField] Transform minSpawn;
     [SerializeField] Transform maxSpawn;
     [SerializeField] int checkPerFrame = 10;
@@ -24,7 +23,6 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
-        //spawnTimer = spawnInterval;
         playerTransform = PlayerHealthController.instance.transform;
         despawnDistance = Vector3.Distance(minSpawn.position, maxSpawn.position) + despawnDistanceValue;
         currentWaveIndex = -1;
@@ -33,13 +31,6 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        //spawnTimer -= Time.deltaTime;
-        //if (spawnTimer <= 0f)
-        //{
-        //    SpawnEnemy();
-        //    spawnTimer = spawnInterval;
-        //}
-
         if(PlayerHealthController.instance.gameObject.activeSelf)
         {
             if(currentWaveIndex < waves.Count)

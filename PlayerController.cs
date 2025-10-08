@@ -4,8 +4,10 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private InputActionReference moveInput;
-    [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private Transform sprite;
+
+    public float moveSpeed = 5f;
+    public float pickupRange = 1.5f;
 
     private Rigidbody2D rb;
     private Animator anim;
