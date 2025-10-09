@@ -61,6 +61,8 @@ public class ExperienceLevelController : MonoBehaviour
 
         UIController.instance.levelUpPanel.SetActive(true);
         Time.timeScale = 0f;
-        UIController.instance.levelUpSelectionButtons[0].UpdateButtonDislay(PlayerController.instance.currentWeapon);
+        UIController.instance.levelUpSelectionButtons[0].UpdateButtonDislay(PlayerController.instance.assignedWeapons[0]);
+        UIController.instance.levelUpSelectionButtons[1].UpdateButtonDislay(PlayerController.instance.unassignedWeapons[0]);
+        UIController.instance.levelUpSelectionButtons[2].UpdateButtonDislay(PlayerController.instance.unassignedWeapons[1]);
     }
 }

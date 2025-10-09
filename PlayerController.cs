@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
+using Unity.Jobs;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,7 +12,8 @@ public class PlayerController : MonoBehaviour
 
     public float moveSpeed = 5f;
     public float pickupRange = 1f;
-    public Weapon currentWeapon;
+    public List<Weapon> unassignedWeapons;
+    public List<Weapon> assignedWeapons;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -31,6 +34,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+        AddWeapon(Random.Range(0, unassignedWeapons.Count));
     }
 
     void Update()
@@ -59,5 +64,22 @@ public class PlayerController : MonoBehaviour
                 anim.SetBool("isMoving", false);
             }
         }
+    }
+
+    public void AddWeapon(int weaponNumber)
+    {
+        if(weaponNumber < unassignedWeapons.Count)
+        {
+            assignedWeapons.Add(unassignedWeapons[weaponNumber]);
+            unassignedWeapons[weaponNumber].gameObject.SetActive(true);
+            unassignedWeapons.RemoveAt(weaponNumber);
+        }
+    }
+
+    public void AddWeapon(Weapon weaponToAdd)
+    {
+         weaponToAdd.gameObject.SetActive(true);
+        assignedWeapons.Add(weaponToAdd);
+        unassignedWeapons.Remove(weaponToAdd);
     }
 }
