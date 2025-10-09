@@ -3,14 +3,29 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController instance;
+
     [SerializeField] private InputActionReference moveInput;
     [SerializeField] private Transform sprite;
 
     public float moveSpeed = 5f;
     public float pickupRange = 1f;
+    public Weapon currentWeapon;
 
     private Rigidbody2D rb;
     private Animator anim;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {

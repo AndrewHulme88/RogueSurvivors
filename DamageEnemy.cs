@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class DamageEnemy : MonoBehaviour
 {
-    [SerializeField] private float damageAmount = 5f;
-    [SerializeField] private float lifetime = 2f;
     [SerializeField] private float growthRate = 5f;
     [SerializeField] private bool shouldKnockBack = false;
     [SerializeField] private bool destroyParent = false;
+
+    public float damageAmount = 5f;
+    public float lifetime = 2f;
 
     private Vector3 targetSize;
 
