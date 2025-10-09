@@ -5,6 +5,7 @@ public class Weapon : MonoBehaviour
 {
     public List<WeaponStats> weaponStats;
     public int weaponLevel = 0;
+    public Sprite weaponIcon;
 
     [HideInInspector]
     public bool statsUpdated = false;
@@ -29,4 +30,5 @@ public class WeaponStats
     public float attackSpeed;
     public float quantity;
     public float duration;
+    public string upgradeDescription;
 }

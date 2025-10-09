@@ -9,6 +9,9 @@ public class UIController : MonoBehaviour
     [SerializeField] Slider expLevelSlider;
     [SerializeField] TMP_Text expLevelText;
 
+    public GameObject levelUpPanel;
+    public LevelUpSelectionButton[] levelUpSelectionButtons;
+
     private void Awake()
     {
         if (instance == null)
