@@ -62,9 +62,6 @@ public class ExperienceLevelController : MonoBehaviour
 
         UIController.instance.levelUpPanel.SetActive(true);
         Time.timeScale = 0f;
-        //UIController.instance.levelUpSelectionButtons[0].UpdateButtonDislay(PlayerController.instance.assignedWeapons[0]);
-        //UIController.instance.levelUpSelectionButtons[1].UpdateButtonDislay(PlayerController.instance.unassignedWeapons[0]);
-        //UIController.instance.levelUpSelectionButtons[2].UpdateButtonDislay(PlayerController.instance.unassignedWeapons[1]);
 
         weaponsToUpgrade.Clear();
         List<Weapon> availableWeapons = new List<Weapon>();
@@ -77,7 +74,7 @@ public class ExperienceLevelController : MonoBehaviour
             availableWeapons.RemoveAt(selectedWeapon);
         }
 
-        if(PlayerController.instance.assignedWeapons.Count < PlayerController.instance.maxWeapons)
+        if(PlayerController.instance.assignedWeapons.Count + PlayerController.instance.maxLevelWeapons.Count < PlayerController.instance.maxWeapons)
         {
             availableWeapons.AddRange(PlayerController.instance.unassignedWeapons);
         }
@@ -95,6 +92,18 @@ public class ExperienceLevelController : MonoBehaviour
         for (int i = 0; i < weaponsToUpgrade.Count; i++)
         {
             UIController.instance.levelUpSelectionButtons[i].UpdateButtonDislay(weaponsToUpgrade[i]);
+        }
+
+        for (int i = 0; i < UIController.instance.levelUpSelectionButtons.Length; i++)
+        {
+            if(i < weaponsToUpgrade.Count)
+            {
+                UIController.instance.levelUpSelectionButtons[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                UIController.instance.levelUpSelectionButtons[i].gameObject.SetActive(false);
+            }
         }
     }
 }

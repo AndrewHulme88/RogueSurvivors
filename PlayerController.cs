@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     public List<Weapon> unassignedWeapons;
     public List<Weapon> assignedWeapons;
 
+    [HideInInspector]
+    public List<Weapon> maxLevelWeapons = new List<Weapon>();
+
     private Rigidbody2D rb;
     private Animator anim;
 

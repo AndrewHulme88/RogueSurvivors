@@ -30,4 +30,10 @@ public class UIController : MonoBehaviour
         expLevelSlider.value = currentExp;
         expLevelText.text = "Level: " + currentLevel;
     }
+
+    public void SkipLevelUp()
+    {
+        levelUpPanel.SetActive(false);
+        Time.timeScale = 1f;
+    }
 }
