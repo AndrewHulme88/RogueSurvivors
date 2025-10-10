@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     public float moveSpeed = 5f;
     public float pickupRange = 1f;
+    public int maxWeapons = 3;
     public List<Weapon> unassignedWeapons;
     public List<Weapon> assignedWeapons;
 
