@@ -1,15 +1,20 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class DamageEnemy : MonoBehaviour
 {
     [SerializeField] private float growthRate = 5f;
     [SerializeField] private bool shouldKnockBack = false;
     [SerializeField] private bool destroyParent = false;
-
+    [SerializeField] private bool shouldDamageOverTime = false;
+    
+    public float damageInterval = 0.5f;
     public float damageAmount = 5f;
     public float lifetime = 2f;
 
     private Vector3 targetSize;
+    private float damageTimer;
+    private List<EnemyController> enemiesInRange = new List<EnemyController>();
 
     private void Start()
     {
@@ -36,16 +41,67 @@ public class DamageEnemy : MonoBehaviour
                 }
             }
         }
+
+        if (shouldDamageOverTime)
+        {
+            damageTimer -= Time.deltaTime;
+
+            if(damageTimer <= 0f)
+            {
+                damageTimer = damageInterval;
+
+                for (int i = 0; i < enemiesInRange.Count; i++)
+                {
+                    if (enemiesInRange[i] != null)
+                    {
+                        enemiesInRange[i].TakeDamage(damageAmount, shouldKnockBack);
+                    }
+                    else
+                    {
+                        enemiesInRange.RemoveAt(i);
+                    }
+                }
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (shouldDamageOverTime == false)
         {
-            EnemyController enemy = collision.GetComponent<EnemyController>();
-            if (enemy != null)
+            if (collision.CompareTag("Enemy"))
             {
-                enemy.TakeDamage(damageAmount, shouldKnockBack);
+                EnemyController enemy = collision.GetComponent<EnemyController>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(damageAmount, shouldKnockBack);
+                }
+            }            
+        }
+        else
+        {
+            if (collision.CompareTag("Enemy"))
+            {
+                EnemyController enemy = collision.GetComponent<EnemyController>();
+                if (enemy != null && !enemiesInRange.Contains(enemy))
+                {
+                    enemiesInRange.Add(enemy);
+                }
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (shouldDamageOverTime)
+        {
+            if (collision.CompareTag("Enemy"))
+            {
+                EnemyController enemy = collision.GetComponent<EnemyController>();
+                if (enemy != null && enemiesInRange.Contains(enemy))
+                {
+                    enemiesInRange.Remove(enemy);
+                }
             }
         }
     }

@@ -23,8 +23,13 @@ public class OrbitWeapon : Weapon
 
         if (spawnTimer <= 0f)
         {
-            Instantiate(weaponToSpawn, weaponToSpawn.position, weaponToSpawn.rotation, weaponHolder).gameObject.SetActive(true);
             spawnTimer = timeBetweenSpawns;
+
+            for(int i = 0; i < weaponStats[weaponLevel].quantity; i++)
+            {
+                float rotationAngle = (360f / weaponStats[weaponLevel].quantity) * i;
+                Instantiate(weaponToSpawn, weaponToSpawn.position, Quaternion.Euler(0f, 0f, rotationAngle), weaponHolder).gameObject.SetActive(true);
+            }
         }
 
         if(statsUpdated)
