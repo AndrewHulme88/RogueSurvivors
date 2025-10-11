@@ -7,7 +7,8 @@ public class DamageEnemy : MonoBehaviour
     [SerializeField] private bool shouldKnockBack = false;
     [SerializeField] private bool destroyParent = false;
     [SerializeField] private bool shouldDamageOverTime = false;
-    
+    [SerializeField] private bool destroyOnHit = false;
+
     public float damageInterval = 0.5f;
     public float damageAmount = 5f;
     public float lifetime = 2f;
@@ -75,6 +76,11 @@ public class DamageEnemy : MonoBehaviour
                 if (enemy != null)
                 {
                     enemy.TakeDamage(damageAmount, shouldKnockBack);
+
+                    if (destroyOnHit)
+                    {
+                        Destroy(gameObject);
+                    }
                 }
             }            
         }
