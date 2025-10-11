@@ -4,10 +4,11 @@ public class CoinController : MonoBehaviour
 {
     public static CoinController instance;
 
-    [SerializeField] private int currentCoins = 0;
     [SerializeField] private PickupCoin coinPrefab;
     [SerializeField] private float coinSpawnOffsetX = 0.2f;
     [SerializeField] private float coinSpawnOffsetY = 0.1f;
+
+    public int currentCoins = 0;
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class CoinController : MonoBehaviour
     public void AddCoins(int amount)
     {
         currentCoins += amount;
+        UIController.instance.UpdateCoins(currentCoins);
     }
 
     public void DropCoin(Vector3 position, int value)

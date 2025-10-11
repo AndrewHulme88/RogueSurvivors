@@ -8,6 +8,7 @@ public class UIController : MonoBehaviour
 
     [SerializeField] Slider expLevelSlider;
     [SerializeField] TMP_Text expLevelText;
+    [SerializeField] TMP_Text coinText;
 
     public GameObject levelUpPanel;
     public LevelUpSelectionButton[] levelUpSelectionButtons;
@@ -35,5 +36,10 @@ public class UIController : MonoBehaviour
     {
         levelUpPanel.SetActive(false);
         Time.timeScale = 1f;
+    }
+
+    public void UpdateCoins(int currentCoins)
+    {
+        coinText.text = "Coins: " + CoinController.instance.currentCoins;
     }
 }
