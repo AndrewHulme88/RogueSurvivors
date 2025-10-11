@@ -5,7 +5,6 @@ public class MeleeWeapon : Weapon
     [SerializeField] private DamageEnemy damageEnemy;
 
     private float attackTimer;
-    private float facingDirection;
 
     private void Start()
     {
@@ -28,12 +27,10 @@ public class MeleeWeapon : Weapon
 
             if (PlayerController.instance.sprite.transform.localScale.x > 0.1f)
             {
-                facingDirection = -1f;
                 damageEnemy.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
             }
             else if (PlayerController.instance.sprite.transform.localScale.x < 0.1f)
             {
-                facingDirection = 1f;
                 damageEnemy.transform.rotation = Quaternion.identity;
             }
 
