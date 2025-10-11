@@ -8,8 +8,8 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
 
     [SerializeField] private InputActionReference moveInput;
-    [SerializeField] private Transform sprite;
 
+    public Transform sprite;
     public float moveSpeed = 5f;
     public float pickupRange = 1f;
     public int maxWeapons = 3;
