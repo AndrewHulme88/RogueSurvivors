@@ -25,6 +25,8 @@ public class AuraWeapon : Weapon
         {
             spawnTimer = spawnTime;
             Instantiate(damageEnemy, transform.position, Quaternion.identity, transform).gameObject.SetActive(true);
+
+            SFXManager.instance.PlaySoundEffectPitched(10);
         }
     }
 

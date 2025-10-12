@@ -46,6 +46,7 @@ public class PlayerHealthController : MonoBehaviour
 
     private void Die()
     {
+        SFXManager.instance.PlaySoundEffect(3);
         gameObject.SetActive(false);
         LevelManager.instance.EndGame();
         Instantiate(deathParticles, transform.position, Quaternion.identity);

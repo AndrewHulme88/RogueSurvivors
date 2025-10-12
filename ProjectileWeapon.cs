@@ -43,6 +43,8 @@ public class ProjectileWeapon : Weapon
 
                     Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation).gameObject.SetActive(true);
                 }
+
+                SFXManager.instance.PlaySoundEffectPitched(6);
             }
         }
     }

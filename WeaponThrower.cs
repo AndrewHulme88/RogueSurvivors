@@ -29,6 +29,8 @@ public class WeaponThrower : Weapon
             {
                 Instantiate(damageEnemy, damageEnemy.transform.position, damageEnemy.transform.rotation).gameObject.SetActive(true);
             }
+
+            SFXManager.instance.PlaySoundEffectPitched(4);
         }
     }
 

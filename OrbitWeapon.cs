@@ -30,6 +30,8 @@ public class OrbitWeapon : Weapon
                 float rotationAngle = (360f / weaponStats[weaponLevel].quantity) * i;
                 Instantiate(weaponToSpawn, weaponToSpawn.position, Quaternion.Euler(0f, 0f, rotationAngle), weaponHolder).gameObject.SetActive(true);
             }
+
+            SFXManager.instance.PlaySoundEffectPitched(8);
         }
 
         if(statsUpdated)

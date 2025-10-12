@@ -41,6 +41,8 @@ public class MeleeWeapon : Weapon
                 float rotationAngle = (360f / weaponStats[weaponLevel].quantity) * i;
                 Instantiate(damageEnemy, damageEnemy.transform.position, Quaternion.Euler(0f, 0f, damageEnemy.transform.rotation.eulerAngles.z + rotationAngle), transform).gameObject.SetActive(true);
             }
+
+            SFXManager.instance.PlaySoundEffectPitched(9);
         }
     }
 
