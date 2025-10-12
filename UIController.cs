@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class UIController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class UIController : MonoBehaviour
     [SerializeField] TMP_Text expLevelText;
     [SerializeField] TMP_Text coinText;
     [SerializeField] TMP_Text timeText;
+    [SerializeField] private InputActionReference startInput;
 
     public TMP_Text endTimeText;
     public GameObject endGamePanel;
@@ -20,6 +22,8 @@ public class UIController : MonoBehaviour
     public PlayerStatsUpgradeDisplay maxWeaponsUpgradeDisplay;
     public GameObject levelUpPanel;
     public LevelUpSelectionButton[] levelUpSelectionButtons;
+    public string mainMenuSceneName = "MainMenu";
+    public GameObject pauseMenuPanel;
 
     private void Awake()
     {
@@ -30,6 +34,14 @@ public class UIController : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void Update()
+    {
+        if (startInput.action.WasPressedThisFrame())
+        {
+            TogglePauseMenu();
         }
     }
 
@@ -85,11 +97,37 @@ public class UIController : MonoBehaviour
 
     public void MainMenu()
     {
-
+        SceneManager.LoadScene(mainMenuSceneName);
+        Time.timeScale = 1f;
     }
 
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1f;
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+        Debug.Log("Game Quit");
+    }
+
+    public void TogglePauseMenu()
+    {
+        if (pauseMenuPanel.activeSelf == true)
+        {
+            pauseMenuPanel.SetActive(false);
+
+            if(levelUpPanel.activeSelf == false)
+            {
+                Time.timeScale = 1f;
+            }
+        }
+        else
+        {
+            pauseMenuPanel.SetActive(true);
+            Time.timeScale = 0f;
+        }
     }
 }
