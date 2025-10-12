@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class UIController : MonoBehaviour
     [SerializeField] TMP_Text coinText;
     [SerializeField] TMP_Text timeText;
 
+    public TMP_Text endTimeText;
+    public GameObject endGamePanel;
     public PlayerStatsUpgradeDisplay moveSpeedUpgradeDisplay;
     public PlayerStatsUpgradeDisplay healthUpgradeDisplay;
     public PlayerStatsUpgradeDisplay pickupRangeUpgradeDisplay;
@@ -78,5 +81,15 @@ public class UIController : MonoBehaviour
         float seconds = Mathf.FloorToInt(time % 60);
 
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    public void MainMenu()
+    {
+
+    }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
