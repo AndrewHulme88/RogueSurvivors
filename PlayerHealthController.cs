@@ -5,8 +5,9 @@ public class PlayerHealthController : MonoBehaviour
 {
     public static PlayerHealthController instance;
 
-    [SerializeField] private float maxHealth = 100f;
     [SerializeField] private Slider healthBarSlider;
+
+    public float maxHealth = 100f;
 
     private float currentHealth;
 
