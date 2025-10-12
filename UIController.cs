@@ -10,6 +10,10 @@ public class UIController : MonoBehaviour
     [SerializeField] TMP_Text expLevelText;
     [SerializeField] TMP_Text coinText;
 
+    public PlayerStatsUpgradeDisplay moveSpeedUpgradeDisplay;
+    public PlayerStatsUpgradeDisplay healthUpgradeDisplay;
+    public PlayerStatsUpgradeDisplay pickupRangeUpgradeDisplay;
+    public PlayerStatsUpgradeDisplay maxWeaponsUpgradeDisplay;
     public GameObject levelUpPanel;
     public LevelUpSelectionButton[] levelUpSelectionButtons;
 

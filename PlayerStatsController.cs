@@ -47,6 +47,14 @@ public class PlayerStatsController : MonoBehaviour
             pickupRange.Add(new PlayerStatsValue(pickupRange[i].cost + pickupRange[1].cost, pickupRange[i].value + (pickupRange[1].value - pickupRange[0].value)));
         }
     }
+
+    public void UpdateDisplay()
+    {
+        UIController.instance.moveSpeedUpgradeDisplay.UpdateDisplay(moveSpeed[currentMoveSpeedLevel + 1].cost, moveSpeed[currentMoveSpeedLevel].value, moveSpeed[currentMoveSpeedLevel + 1].value);
+        UIController.instance.healthUpgradeDisplay.UpdateDisplay(maxHealth[currentMaxHealthLevel + 1].cost, maxHealth[currentMaxHealthLevel].value, maxHealth[currentMaxHealthLevel + 1].value);
+        UIController.instance.pickupRangeUpgradeDisplay.UpdateDisplay(pickupRange[currentPickupRangeLevel + 1].cost, pickupRange[currentPickupRangeLevel].value, pickupRange[currentPickupRangeLevel + 1].value);
+        UIController.instance.maxWeaponsUpgradeDisplay.UpdateDisplay(maxWeapons[currentMaxWeaponsLevel + 1].cost, maxWeapons[currentMaxWeaponsLevel].value, maxWeapons[currentMaxWeaponsLevel + 1].value);
+    }
 }
 
 [System.Serializable]
