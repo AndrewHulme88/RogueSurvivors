@@ -6,6 +6,7 @@ public class PlayerHealthController : MonoBehaviour
     public static PlayerHealthController instance;
 
     [SerializeField] private Slider healthBarSlider;
+    [SerializeField] private GameObject deathParticles;
 
     public float maxHealth = 100f;
 
@@ -45,7 +46,8 @@ public class PlayerHealthController : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Player has died.");
-        // Add death logic here (e.g., respawn, game over screen)
+        gameObject.SetActive(false);
+        LevelManager.instance.EndGame();
+        Instantiate(deathParticles, transform.position, Quaternion.identity);
     }
 }
