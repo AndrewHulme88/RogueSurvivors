@@ -31,6 +31,13 @@ public class PlayerHealthController : MonoBehaviour
         healthBarSlider.value = currentHealth;
     }
 
+    public void Heal(float healAmount)
+    {
+        currentHealth += healAmount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        healthBarSlider.value = currentHealth;
+    }
+
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
