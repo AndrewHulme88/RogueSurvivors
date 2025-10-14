@@ -52,11 +52,11 @@ public class PlayerController : MonoBehaviour
 
         if (rb.linearVelocity.x < 0f)
         {
-            sprite.transform.localScale = new Vector3(1f, 1f, 1f);
+            sprite.transform.localScale = new Vector3(-1f, 1f, 1f);
         }
         else if (rb.linearVelocity.x > 0f)
         {
-            sprite.transform.localScale = new Vector3(-1f, 1f, 1f);
+            sprite.transform.localScale = new Vector3(1f, 1f, 1f);
         }
 
         // Animation

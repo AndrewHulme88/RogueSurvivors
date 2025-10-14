@@ -7,6 +7,7 @@ public class ExperienceLevelController : MonoBehaviour
     
     [SerializeField] private PickupExp pickupExp;
     [SerializeField] private List<Weapon> weaponsToUpgrade;
+    [SerializeField] private float experienceMultiplier = 2f;
 
     public int currentExperience = 0;
     public List<int> expLevels;
@@ -29,7 +30,7 @@ public class ExperienceLevelController : MonoBehaviour
     {
         while(expLevels.Count < levelCount)
         {
-            expLevels.Add(Mathf.CeilToInt(expLevels[expLevels.Count - 1] * 1.1f));
+            expLevels.Add(Mathf.CeilToInt(expLevels[expLevels.Count - 1] * experienceMultiplier));
         }
     }
 
