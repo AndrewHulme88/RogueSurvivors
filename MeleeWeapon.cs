@@ -25,15 +25,6 @@ public class MeleeWeapon : Weapon
         {
             attackTimer = weaponStats[weaponLevel].attackSpeed;
 
-            if (PlayerController.instance.sprite.transform.localScale.x > 0.1f)
-            {
-                damageEnemy.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
-            }
-            else if (PlayerController.instance.sprite.transform.localScale.x < 0.1f)
-            {
-                damageEnemy.transform.rotation = Quaternion.identity;
-            }
-
             Instantiate(damageEnemy, damageEnemy.transform.position, damageEnemy.transform.rotation, transform).gameObject.SetActive(true);
 
             for (int i = 1; i < weaponStats[weaponLevel].quantity; i++)

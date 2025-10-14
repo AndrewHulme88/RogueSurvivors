@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private InputActionReference moveInput;
 
-    public Transform sprite;
     public float moveSpeed = 5f;
     public float pickupRange = 1f;
     public int maxWeapons = 3;
@@ -52,11 +51,11 @@ public class PlayerController : MonoBehaviour
 
         if (rb.linearVelocity.x < 0f)
         {
-            sprite.transform.localScale = new Vector3(-1f, 1f, 1f);
+            transform.localScale = new Vector3(-1f, 1f, 1f);
         }
         else if (rb.linearVelocity.x > 0f)
         {
-            sprite.transform.localScale = new Vector3(1f, 1f, 1f);
+            transform.localScale = new Vector3(1f, 1f, 1f);
         }
 
         // Animation

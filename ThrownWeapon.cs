@@ -15,7 +15,7 @@ public class ThrownWeapon : MonoBehaviour
 
     private void Update()
     {
-        transform.rotation = Quaternion.Euler(0f, 0f, transform.rotation.eulerAngles.z + (rotateSpeed * 360f * Time.deltaTime * Mathf.Sign(PlayerController.instance.sprite.transform.localScale.x)));
+        transform.rotation = Quaternion.Euler(0f, 0f, transform.rotation.eulerAngles.z + (rotateSpeed * 360f * Time.deltaTime * Mathf.Sign(PlayerController.instance.transform.localScale.x)));
     }
 
     private void Throw()
