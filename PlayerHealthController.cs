@@ -31,18 +31,6 @@ public class PlayerHealthController : MonoBehaviour
         healthBarSlider.value = currentHealth;
     }
 
-    private void Update()
-    {
-        if (PlayerController.instance.transform.localScale.x < 0.1f)
-        {
-            healthBarSlider.transform.localScale = new Vector3(-1f, 1f, 1f);
-        }
-        else if (PlayerController.instance.transform.localScale.x > 0.1f)
-        {
-            healthBarSlider.transform.localScale = new Vector3(1f, 1f, 1f);
-        }
-    }
-
     public void Heal(float healAmount)
     {
         currentHealth += healAmount;
