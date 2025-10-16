@@ -98,6 +98,18 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    public void KillEnemy()
+    {
+        Destroy(gameObject);
+
+        ExperienceLevelController.instance.SpawnExp(transform.position, expAmount);
+
+        if (Random.value <= coinDropChance)
+        {
+            CoinController.instance.DropCoin(transform.position, coinValue);
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && hitTimer <= 0f)
