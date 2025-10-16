@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class SanityController : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class SanityController : MonoBehaviour
     public float maxSanity = 100f;
     public float sanityDecreaseRate = 2f;
 
+    private EnemySpawner enemySpawner;
     private float currentSanity;
 
     private void Awake()
@@ -29,6 +32,7 @@ public class SanityController : MonoBehaviour
         currentSanity = maxSanity;
         sanityBarSlider.maxValue = maxSanity;
         sanityBarSlider.value = currentSanity;
+        enemySpawner = FindFirstObjectByType<EnemySpawner>();
     }
 
     private void Update()
@@ -40,7 +44,7 @@ public class SanityController : MonoBehaviour
 
         if (currentSanity <= 0)
         {
-            
+            ApplyRandomSanityDebuff();
         }
     }
 
@@ -50,4 +54,24 @@ public class SanityController : MonoBehaviour
         currentSanity = Mathf.Clamp(currentSanity, 0, maxSanity);
         sanityBarSlider.value = currentSanity;
     }
+
+    private void ApplyRandomSanityDebuff()
+    {
+        List<SanityEffect> sanityEffectPool = new List<SanityEffect> {
+            new SanityEffect { effectName = "Panic", description = "Enemies spawn faster", effectAction = () => {enemySpawner.spawnTimer /= 2f; } },
+            new SanityEffect { effectName = "Hallucination", description = "Controls are reversed", effectAction = () => { PlayerController.instance.moveSpeed *= 0.5f; } },
+            new SanityEffect { effectName = "Weakness", description = "Player health is halved", effectAction = () => { PlayerHealthController.instance.maxHealth /= 2; PlayerHealthController.instance.currentHealth = Mathf.Min(PlayerHealthController.instance.currentHealth, PlayerHealthController.instance.maxHealth); PlayerHealthController.instance.UpdateHealthUI(); } },
+        };
+
+        SanityEffect debuff = sanityEffectPool[UnityEngine.Random.Range(0, sanityEffectPool.Count)];
+        debuff.effectAction.Invoke();
+        currentSanity = maxSanity;
+    }
+}
+
+public class SanityEffect
+{
+    public string effectName;
+    public string description;
+    public Action effectAction;
 }

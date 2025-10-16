@@ -9,8 +9,7 @@ public class PlayerHealthController : MonoBehaviour
     [SerializeField] private GameObject deathParticles;
 
     public float maxHealth = 100f;
-
-    private float currentHealth;
+    public float currentHealth;
 
     private void Awake()
     {
@@ -48,6 +47,12 @@ public class PlayerHealthController : MonoBehaviour
             Die();
         }
 
+        healthBarSlider.value = currentHealth;
+    }
+
+    public void UpdateHealthUI()
+    {
+        healthBarSlider.maxValue = maxHealth;
         healthBarSlider.value = currentHealth;
     }
 

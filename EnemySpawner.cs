@@ -13,8 +13,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float despawnDistanceValue = 5f;
 
     public List<WaveInfo> waves;
+    public float spawnTimer;
 
-    private float spawnTimer;
     private Transform playerTransform;
     private List<GameObject> spawnedEnemies = new List<GameObject>();
     private int enemyToCheck;
