@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class PickupExp : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float timeBetweenChecks = 0.2f;
 
+    public float moveSpeed = 5f;
     public int expAmount = 10;
+    public bool isMovingToPlayer = false;
 
-    private bool isMovingToPlayer = false;
     private float checkTimer = 0f;
     private PlayerController playerController;
 
