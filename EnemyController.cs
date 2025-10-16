@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -15,11 +16,13 @@ public class EnemyController : MonoBehaviour
     private Transform playerTransform;
     private float hitTimer = 0f;
     private float knockBackTimer = 0f;
+    private float originalMoveSpeed;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         playerTransform = PlayerHealthController.instance.transform;
+        originalMoveSpeed = moveSpeed;
     }
 
     void Update()
@@ -108,6 +111,18 @@ public class EnemyController : MonoBehaviour
         {
             CoinController.instance.DropCoin(transform.position, coinValue);
         }
+    }
+
+    public void FreezeEnemy(float freezeTime)
+    {
+        moveSpeed = 0f;
+        StartCoroutine(UnfreezeAfterDelay(freezeTime));
+    }
+
+    private IEnumerator UnfreezeAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        moveSpeed = originalMoveSpeed;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

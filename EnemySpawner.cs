@@ -2,6 +2,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using System.Collections.Generic;
 using Unity.Jobs;
+using System.Collections;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class EnemySpawner : MonoBehaviour
     private float despawnDistance;
     private int currentWaveIndex;
     private float waveTimer;
+    private bool isFrozen = false;
 
     private void Start()
     {
@@ -31,6 +33,8 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
+        if (isFrozen) return;
+
         if(PlayerHealthController.instance.gameObject.activeSelf)
         {
             if(currentWaveIndex < waves.Count)
@@ -139,6 +143,18 @@ public class EnemySpawner : MonoBehaviour
 
         waveTimer = waves[currentWaveIndex].waveLength;
         spawnTimer= waves[currentWaveIndex].timeBetweenSpawns;
+    }
+
+    public void FreezeTimer(float freezeTime)
+    {
+        isFrozen = true;
+        StartCoroutine(UnfreezeAfterDelay(freezeTime));
+    }
+
+    private IEnumerator UnfreezeAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        isFrozen = false;
     }
 }
 
