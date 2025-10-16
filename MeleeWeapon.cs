@@ -25,6 +25,15 @@ public class MeleeWeapon : Weapon
         {
             attackTimer = weaponStats[weaponLevel].attackSpeed;
 
+            if(PlayerController.instance.spriteObject.transform.localScale.x < 0f)
+            {
+                damageEnemy.transform.localScale = new Vector3(-Mathf.Abs(damageEnemy.transform.localScale.x), damageEnemy.transform.localScale.y, damageEnemy.transform.localScale.z);
+            }
+            else
+            {
+                damageEnemy.transform.localScale = new Vector3(Mathf.Abs(damageEnemy.transform.localScale.x), damageEnemy.transform.localScale.y, damageEnemy.transform.localScale.z);
+            }
+
             Instantiate(damageEnemy, damageEnemy.transform.position, damageEnemy.transform.rotation, transform).gameObject.SetActive(true);
 
             for (int i = 1; i < weaponStats[weaponLevel].quantity; i++)

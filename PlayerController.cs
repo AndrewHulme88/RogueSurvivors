@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
 
     [SerializeField] private InputActionReference moveInput;
-
+    
+    public GameObject spriteObject;
     public float moveSpeed = 5f;
     public float pickupRange = 1f;
     public int maxWeapons = 3;
@@ -36,7 +37,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        anim = spriteObject.GetComponent<Animator>();
 
         if(assignedWeapons.Count == 0)
         {
@@ -51,11 +52,11 @@ public class PlayerController : MonoBehaviour
 
         if (rb.linearVelocity.x < 0f)
         {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
+            spriteObject.transform.localScale = new Vector3(-1f, 1f, 1f);
         }
         else if (rb.linearVelocity.x > 0f)
         {
-            transform.localScale = new Vector3(1f, 1f, 1f);
+            spriteObject.transform.localScale = new Vector3(1f, 1f, 1f);
         }
 
         // Animation
