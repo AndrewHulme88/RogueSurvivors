@@ -8,7 +8,9 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
 
     [SerializeField] private InputActionReference moveInput;
-    
+
+    public string characterName;
+    public Sprite characterSprite;
     public GameObject spriteObject;
     public float moveSpeed = 5f;
     public float pickupRange = 1f;
