@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public int maxWeapons = 3;
     public List<Weapon> unassignedWeapons;
     public List<Weapon> assignedWeapons;
+    public bool isMovementReversed = false;
 
     [HideInInspector]
     public List<Weapon> maxLevelWeapons = new List<Weapon>();
@@ -48,7 +49,13 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // Movement
-        rb.linearVelocity = moveInput.action.ReadValue<Vector2>() * moveSpeed;
+        Vector2 input = moveInput.action.ReadValue<Vector2>();
+        if (isMovementReversed)
+        {
+            input = -input;
+        }
+
+        rb.linearVelocity = input * moveSpeed;
 
         if (rb.linearVelocity.x < 0f)
         {

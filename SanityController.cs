@@ -58,9 +58,12 @@ public class SanityController : MonoBehaviour
     private void ApplyRandomSanityDebuff()
     {
         List<SanityEffect> sanityEffectPool = new List<SanityEffect> {
-            new SanityEffect { effectName = "Panic", description = "Enemies spawn faster", effectAction = () => {enemySpawner.spawnTimer /= 2f; } },
-            new SanityEffect { effectName = "Hallucination", description = "Controls are reversed", effectAction = () => { PlayerController.instance.moveSpeed *= 0.5f; } },
-            new SanityEffect { effectName = "Weakness", description = "Player health is halved", effectAction = () => { PlayerHealthController.instance.maxHealth /= 2; PlayerHealthController.instance.currentHealth = Mathf.Min(PlayerHealthController.instance.currentHealth, PlayerHealthController.instance.maxHealth); PlayerHealthController.instance.UpdateHealthUI(); } },
+            new SanityEffect { effectName = "Panic", description = "Enemies spawn faster", effectAction = () => {enemySpawner.spawnTimeMultiplier *= 1.2f; } },
+            new SanityEffect { effectName = "Hallucination", description = "Controls are reversed", effectAction = () => { PlayerController.instance.isMovementReversed = true; } },
+            new SanityEffect { effectName = "Weakness", description = "Max health is reduced", effectAction = () => { PlayerHealthController.instance.maxHealth *= 0.9f; PlayerHealthController.instance.currentHealth = Mathf.Min(PlayerHealthController.instance.currentHealth, PlayerHealthController.instance.maxHealth); PlayerHealthController.instance.UpdateHealthUI(); } },
+            new SanityEffect { effectName = "Clumsiness", description = "Movement speed is reduced", effectAction = () => { PlayerController.instance.moveSpeed *= 0.9f; } },
+            new SanityEffect { effectName = "Confusion", description = "Pickup range is reduced", effectAction = () => { PlayerController.instance.pickupRange *= 0.8f; } },
+            new SanityEffect { effectName = "Stress", description = "Sanity decreases faster", effectAction = () => { sanityDecreaseRate *= 1.5f; } },
         };
 
         SanityEffect debuff = sanityEffectPool[UnityEngine.Random.Range(0, sanityEffectPool.Count)];

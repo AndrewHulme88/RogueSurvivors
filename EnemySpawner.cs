@@ -13,8 +13,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float despawnDistanceValue = 5f;
 
     public List<WaveInfo> waves;
-    public float spawnTimer;
+    public float spawnTimeMultiplier = 1f;
 
+    private float spawnTimer;
     private Transform playerTransform;
     private List<GameObject> spawnedEnemies = new List<GameObject>();
     private int enemyToCheck;
@@ -46,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
                     GoToNextWave();
                 }
 
-                spawnTimer -= Time.deltaTime;
+                spawnTimer -= Time.deltaTime * spawnTimeMultiplier;
 
                 if(spawnTimer <= 0f)
                 {
