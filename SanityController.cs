@@ -9,8 +9,8 @@ public class SanityController : MonoBehaviour
 
     [SerializeField] private Slider sanityBarSlider;
 
-    public float maxSanity = 100f;
-    public float sanityDecreaseRate = 2f;
+    public float maxSanity;
+    public float sanityDecreaseRate;
 
     private EnemySpawner enemySpawner;
     private float currentSanity;
@@ -29,6 +29,8 @@ public class SanityController : MonoBehaviour
 
     private void Start()
     {
+        maxSanity = PlayerController.instance.maxSanity;
+        sanityDecreaseRate = PlayerController.instance.sanityDecreaseRate;
         currentSanity = maxSanity;
         sanityBarSlider.maxValue = maxSanity;
         sanityBarSlider.value = currentSanity;

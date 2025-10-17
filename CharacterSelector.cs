@@ -9,6 +9,8 @@ public class CharacterSelector : MonoBehaviour
     [SerializeField] private TMP_Text maxHealthText;
     [SerializeField] private TMP_Text moveSpeedText;
     [SerializeField] private TMP_Text pickupRangeText;
+    [SerializeField] private TMP_Text maxSanityText;
+    [SerializeField] private TMP_Text sanityDecreaseText;
 
     public static GameObject selectedCharacter;
 
@@ -35,8 +37,11 @@ public class CharacterSelector : MonoBehaviour
 
         PlayerController characterController = selectedCharacter.GetComponent<PlayerController>();
         PlayerHealthController healthController = selectedCharacter.GetComponent<PlayerHealthController>();
-        maxHealthText.text = "Max Health: " + healthController.maxHealth.ToString();
-        moveSpeedText.text = "Move Speed: " + characterController.moveSpeed.ToString();
-        pickupRangeText.text = "Pickup Range: " + characterController.pickupRange.ToString();
+
+        maxHealthText.text = healthController.maxHealth.ToString();
+        moveSpeedText.text = characterController.moveSpeed.ToString();
+        pickupRangeText.text = characterController.pickupRange.ToString();
+        maxSanityText.text = characterController.maxSanity.ToString();
+        sanityDecreaseText.text = characterController.sanityDecreaseRate.ToString();
     }
 }
