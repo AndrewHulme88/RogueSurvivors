@@ -6,6 +6,9 @@ using TMPro;
 public class CharacterSelector : MonoBehaviour
 {
     [SerializeField] private GameObject confirmButton;
+    [SerializeField] private TMP_Text maxHealthText;
+    [SerializeField] private TMP_Text moveSpeedText;
+    [SerializeField] private TMP_Text pickupRangeText;
 
     public static GameObject selectedCharacter;
 
@@ -29,5 +32,11 @@ public class CharacterSelector : MonoBehaviour
     {
         selectedCharacter = characterPrefabs[index];
         confirmButton.SetActive(true);
+
+        PlayerController characterController = selectedCharacter.GetComponent<PlayerController>();
+        PlayerHealthController healthController = selectedCharacter.GetComponent<PlayerHealthController>();
+        maxHealthText.text = "Max Health: " + healthController.maxHealth.ToString();
+        moveSpeedText.text = "Move Speed: " + characterController.moveSpeed.ToString();
+        pickupRangeText.text = "Pickup Range: " + characterController.pickupRange.ToString();
     }
 }
