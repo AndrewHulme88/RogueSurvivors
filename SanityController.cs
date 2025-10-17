@@ -66,6 +66,7 @@ public class SanityController : MonoBehaviour
         SanityEffect debuff = sanityEffectPool[UnityEngine.Random.Range(0, sanityEffectPool.Count)];
         debuff.effectAction.Invoke();
         currentSanity = maxSanity;
+        UIController.instance.ShowSanityEffectPanel(debuff.effectName, debuff.description);
     }
 }
 

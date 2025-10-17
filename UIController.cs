@@ -13,6 +13,8 @@ public class UIController : MonoBehaviour
     [SerializeField] TMP_Text coinText;
     [SerializeField] TMP_Text timeText;
     [SerializeField] private InputActionReference startInput;
+    [SerializeField] private TMP_Text sanityEffectNameText;
+    [SerializeField] private TMP_Text sanityEffectDescriptionText;
 
     public TMP_Text endTimeText;
     public GameObject endGamePanel;
@@ -24,6 +26,7 @@ public class UIController : MonoBehaviour
     public LevelUpSelectionButton[] levelUpSelectionButtons;
     public string mainMenuSceneName = "MainMenu";
     public GameObject pauseMenuPanel;
+    public GameObject sanityEffectPanel;
 
     private void Awake()
     {
@@ -129,5 +132,19 @@ public class UIController : MonoBehaviour
             pauseMenuPanel.SetActive(true);
             Time.timeScale = 0f;
         }
+    }
+
+    public void ShowSanityEffectPanel(string name, string description)
+    {
+        sanityEffectNameText.text = name;
+        sanityEffectDescriptionText.text = description;
+        sanityEffectPanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void CloseSanityEffectPanel()
+    {
+        sanityEffectPanel.SetActive(false);
+        Time.timeScale = 1f;
     }
 }
