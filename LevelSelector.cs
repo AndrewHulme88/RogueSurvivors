@@ -5,16 +5,20 @@ using UnityEngine.SceneManagement;
 public class LevelSelector : MonoBehaviour
 {
     [SerializeField] private GameObject confirmButton;
-    [SerializeField] private string levelName;
+    
+    private string selectedLevelName = null;
 
-    public void SelectLevel()
+    public void SelectLevel(string levelToSelect)
     {
-        //confirmButton.SetActive(true);
-        SceneManager.LoadScene(levelName);
+        selectedLevelName = levelToSelect;
+        confirmButton.SetActive(true);
     }
 
-    //public void ConfirmLevel()
-    //{
-    //    SceneManager.LoadScene(levelName);
-    //}
+    public void ConfirmLevel()
+    {
+        if (!string.IsNullOrEmpty(selectedLevelName))
+        {
+            SceneManager.LoadScene(selectedLevelName);        
+        }
+    }
 }
