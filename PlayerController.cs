@@ -12,14 +12,15 @@ public class PlayerController : MonoBehaviour
     public string characterName;
     public Sprite characterSprite;
     public GameObject spriteObject;
+    public List<Weapon> unassignedWeapons;
+    public List<Weapon> assignedWeapons;
+    public bool isMovementReversed = false;
+    // Stats
     public float moveSpeed = 5f;
     public float pickupRange = 1f;
     public int maxWeapons = 3;
     public float maxSanity = 100f;
     public float sanityDecreaseRate = 2f;
-    public List<Weapon> unassignedWeapons;
-    public List<Weapon> assignedWeapons;
-    public bool isMovementReversed = false;
 
     [HideInInspector]
     public List<Weapon> maxLevelWeapons = new List<Weapon>();
@@ -48,6 +49,8 @@ public class PlayerController : MonoBehaviour
         {
             AddWeapon(Random.Range(0, unassignedWeapons.Count));
         }
+
+        EquipmentUI.instance.UpdateSlot(assignedWeapons.Count - 1, assignedWeapons[assignedWeapons.Count - 1].weaponIcon);
     }
 
     void Update()
@@ -91,13 +94,15 @@ public class PlayerController : MonoBehaviour
             assignedWeapons.Add(unassignedWeapons[weaponNumber]);
             unassignedWeapons[weaponNumber].gameObject.SetActive(true);
             unassignedWeapons.RemoveAt(weaponNumber);
+            EquipmentUI.instance.UpdateSlot(assignedWeapons.Count - 1, assignedWeapons[assignedWeapons.Count - 1].weaponIcon);
         }
     }
 
     public void AddWeapon(Weapon weaponToAdd)
     {
-         weaponToAdd.gameObject.SetActive(true);
+        weaponToAdd.gameObject.SetActive(true);
         assignedWeapons.Add(weaponToAdd);
         unassignedWeapons.Remove(weaponToAdd);
+        EquipmentUI.instance.UpdateSlot(assignedWeapons.Count - 1, assignedWeapons[assignedWeapons.Count - 1].weaponIcon);
     }
 }

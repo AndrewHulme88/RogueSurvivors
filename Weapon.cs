@@ -33,7 +33,7 @@ public class WeaponStats
     public float projectileSpeed;
     public float damage;
     public float range;
-    public float attackSpeed;
+    public float cooldown;
     public float quantity;
     public float duration;
     public string upgradeDescription;
