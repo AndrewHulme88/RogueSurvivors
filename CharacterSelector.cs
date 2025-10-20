@@ -11,6 +11,7 @@ public class CharacterSelector : MonoBehaviour
     [SerializeField] private TMP_Text pickupRangeText;
     [SerializeField] private TMP_Text maxSanityText;
     [SerializeField] private TMP_Text sanityDecreaseText;
+    [SerializeField] private TMP_Text expGainText;
 
     public static GameObject selectedCharacter;
 
@@ -43,5 +44,6 @@ public class CharacterSelector : MonoBehaviour
         pickupRangeText.text = characterController.pickupRange.ToString();
         maxSanityText.text = characterController.maxSanity.ToString();
         sanityDecreaseText.text = characterController.sanityDecreaseRate.ToString();
+        expGainText.text = characterController.expGain.ToString() + " %";
     }
 }
