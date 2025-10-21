@@ -42,7 +42,8 @@ public class PickupExp : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            ExperienceLevelController.instance.AddExperience(expAmount);
+            int expGainMultiplier = PlayerController.instance.expGain;
+            ExperienceLevelController.instance.AddExperience(expAmount * expGainMultiplier);
             Destroy(gameObject);
         }
     }

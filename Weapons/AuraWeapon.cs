@@ -35,7 +35,7 @@ public class AuraWeapon : Weapon
         damageEnemy.damageAmount = weaponStats[weaponLevel].damage;
         transform.localScale = Vector3.one * weaponStats[weaponLevel].range;
         damageEnemy.damageInterval = weaponStats[weaponLevel].projectileSpeed;
-        spawnTime = weaponStats[weaponLevel].attackSpeed;
+        spawnTime = weaponStats[weaponLevel].cooldown;
         damageEnemy.lifetime = weaponStats[weaponLevel].duration;
         spawnTimer = 0f;
     }

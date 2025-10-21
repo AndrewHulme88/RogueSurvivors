@@ -27,7 +27,7 @@ public class ProjectileWeapon : Weapon
 
         if(shotTimer <= 0f)
         {
-            shotTimer = weaponStats[weaponLevel].attackSpeed;
+            shotTimer = weaponStats[weaponLevel].cooldown;
 
             Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(transform.position, weaponRange * weaponStats[weaponLevel].range, enemyLayers);
 

@@ -7,7 +7,8 @@ public class ExperienceLevelController : MonoBehaviour
     
     [SerializeField] private PickupExp pickupExp;
     [SerializeField] private List<Weapon> weaponsToUpgrade;
-    [SerializeField] private float experienceMultiplier = 2f;
+    [SerializeField] private List<PassiveItems> passiveItemsToUpgrade;
+    [SerializeField] private float experienceMultiplier = 2f; // For scaling experience required per level
 
     public int currentExperience = 0;
     public List<int> expLevels;
@@ -66,41 +67,62 @@ public class ExperienceLevelController : MonoBehaviour
         Time.timeScale = 0f;
 
         weaponsToUpgrade.Clear();
+        passiveItemsToUpgrade.Clear();
         List<Weapon> availableWeapons = new List<Weapon>();
+        List<PassiveItems> availablePassiveItems = new List<PassiveItems>();
         availableWeapons.AddRange(PlayerController.instance.assignedWeapons);
+        availablePassiveItems.AddRange(PlayerController.instance.assignedPassiveItems);
 
-        if (availableWeapons.Count > 0)
+        List<UpgradeOption> upgradePool = new List<UpgradeOption>();
+
+        foreach(Weapon weaponOption in PlayerController.instance.assignedWeapons)
         {
-            int selectedWeapon = Random.Range(0, availableWeapons.Count);
-            weaponsToUpgrade.Add(availableWeapons[selectedWeapon]);
-            availableWeapons.RemoveAt(selectedWeapon);
+            upgradePool.Add(new UpgradeOption(weaponOption));
         }
 
         if(PlayerController.instance.assignedWeapons.Count + PlayerController.instance.maxLevelWeapons.Count < PlayerController.instance.maxWeapons)
         {
-            availableWeapons.AddRange(PlayerController.instance.unassignedWeapons);
-        }
-
-        for (int i = weaponsToUpgrade.Count; i < PlayerController.instance.maxWeapons; i++)
-        {
-            if (availableWeapons.Count > 0)
+            foreach (Weapon weaponOption in PlayerController.instance.unassignedWeapons)
             {
-                int selectedWeapon = Random.Range(0, availableWeapons.Count);
-                weaponsToUpgrade.Add(availableWeapons[selectedWeapon]);
-                availableWeapons.RemoveAt(selectedWeapon);
+                upgradePool.Add(new UpgradeOption(weaponOption));
             }
         }
 
-        for (int i = 0; i < weaponsToUpgrade.Count; i++)
+        foreach(PassiveItems passiveItemOption in PlayerController.instance.assignedPassiveItems)
         {
-            UIController.instance.levelUpSelectionButtons[i].UpdateButtonDislay(weaponsToUpgrade[i]);
+            upgradePool.Add(new UpgradeOption(passiveItemOption));
         }
 
-        for (int i = 0; i < UIController.instance.levelUpSelectionButtons.Length; i++)
+        foreach (PassiveItems passiveItemOption in PlayerController.instance.unassignedPassiveItems)
         {
-            if(i < weaponsToUpgrade.Count)
+            upgradePool.Add(new UpgradeOption(passiveItemOption));
+        }
+
+        List<UpgradeOption> selectedUpgrades = new List<UpgradeOption>();
+        int optionsToShow = Mathf.Min(3, upgradePool.Count);
+
+        for (int i = 0; i < optionsToShow; i++)
+        {
+            int selectedIndex = Random.Range(0, upgradePool.Count);
+            selectedUpgrades.Add(upgradePool[selectedIndex]);
+            upgradePool.RemoveAt(selectedIndex);
+        }
+
+        for(int i = 0; i < UIController.instance.levelUpSelectionButtons.Length; i++)
+        {
+            if(i < selectedUpgrades.Count)
             {
+                var upgrade = selectedUpgrades[i];
                 UIController.instance.levelUpSelectionButtons[i].gameObject.SetActive(true);
+
+                if (upgrade.isWeapon)
+                {
+                    UIController.instance.levelUpSelectionButtons[i].UpdateButtonDislay(upgrade.weaponOption);
+                }
+                else
+                {
+                    UIController.instance.levelUpSelectionButtons[i].UpdateButtonDislay(upgrade.passiveItemOption);
+                }
             }
             else
             {
@@ -109,5 +131,65 @@ public class ExperienceLevelController : MonoBehaviour
         }
 
         PlayerStatsController.instance.UpdateDisplay();
+
+        //if (availableWeapons.Count > 0)
+        //{
+        //    int selectedWeapon = Random.Range(0, availableWeapons.Count);
+        //    weaponsToUpgrade.Add(availableWeapons[selectedWeapon]);
+        //    availableWeapons.RemoveAt(selectedWeapon);
+        //}
+
+        //if(PlayerController.instance.assignedWeapons.Count + PlayerController.instance.maxLevelWeapons.Count < PlayerController.instance.maxWeapons)
+        //{
+        //    availableWeapons.AddRange(PlayerController.instance.unassignedWeapons);
+        //}
+
+        //for (int i = weaponsToUpgrade.Count; i < PlayerController.instance.maxWeapons; i++)
+        //{
+        //    if (availableWeapons.Count > 0)
+        //    {
+        //        int selectedWeapon = Random.Range(0, availableWeapons.Count);
+        //        weaponsToUpgrade.Add(availableWeapons[selectedWeapon]);
+        //        availableWeapons.RemoveAt(selectedWeapon);
+        //    }
+        //}
+
+        //for (int i = 0; i < weaponsToUpgrade.Count; i++)
+        //{
+        //    UIController.instance.levelUpSelectionButtons[i].UpdateButtonDislay(weaponsToUpgrade[i]);
+        //}
+
+        //for (int i = 0; i < UIController.instance.levelUpSelectionButtons.Length; i++)
+        //{
+        //    if(i < weaponsToUpgrade.Count)
+        //    {
+        //        UIController.instance.levelUpSelectionButtons[i].gameObject.SetActive(true);
+        //    }
+        //    else
+        //    {
+        //        UIController.instance.levelUpSelectionButtons[i].gameObject.SetActive(false);
+        //    }
+        //}
+
+        //PlayerStatsController.instance.UpdateDisplay();
+    }
+}
+
+public class UpgradeOption
+{
+    public Weapon weaponOption;
+    public PassiveItems passiveItemOption;
+    public bool isWeapon;
+
+    public UpgradeOption(Weapon weapon)
+    {
+        weaponOption = weapon;
+        isWeapon = true;
+    }
+
+    public UpgradeOption(PassiveItems passiveItem)
+    {
+        passiveItemOption = passiveItem;
+        isWeapon = false;
     }
 }

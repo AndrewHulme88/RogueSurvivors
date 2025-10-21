@@ -23,7 +23,7 @@ public class WeaponThrower : Weapon
 
         if(throwTimer <= 0f)
         {
-            throwTimer = weaponStats[weaponLevel].attackSpeed;
+            throwTimer = weaponStats[weaponLevel].cooldown;
 
             for(int i = 0; i < weaponStats[weaponLevel].quantity; i++)
             {

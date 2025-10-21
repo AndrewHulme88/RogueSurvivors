@@ -45,7 +45,7 @@ public class OrbitWeapon : Weapon
     {
         damageEnemy.damageAmount = weaponStats[weaponLevel].damage;
         transform.localScale = Vector3.one * weaponStats[weaponLevel].range;
-        timeBetweenSpawns = weaponStats[weaponLevel].attackSpeed;
+        timeBetweenSpawns = weaponStats[weaponLevel].cooldown;
         damageEnemy.lifetime = weaponStats[weaponLevel].duration;
 
         spawnTimer = 0f;

@@ -23,7 +23,7 @@ public class MeleeWeapon : Weapon
 
         if (attackTimer <= 0f)
         {
-            attackTimer = weaponStats[weaponLevel].attackSpeed;
+            attackTimer = weaponStats[weaponLevel].cooldown;
 
             if(PlayerController.instance.spriteObject.transform.localScale.x < 0f)
             {

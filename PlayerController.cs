@@ -14,17 +14,21 @@ public class PlayerController : MonoBehaviour
     public GameObject spriteObject;
     public List<Weapon> unassignedWeapons;
     public List<Weapon> assignedWeapons;
+    public List<PassiveItems> unassignedPassiveItems;
+    public List<PassiveItems> assignedPassiveItems;
     public bool isMovementReversed = false;
     // Stats
     public float moveSpeed = 5f;
     public float pickupRange = 1f;
     public int maxWeapons = 3;
+    public int maxPassiveItems = 3;
     public float maxSanity = 100f;
     public float sanityDecreaseRate = 2f;
     public int expGain = 1;
 
     [HideInInspector]
     public List<Weapon> maxLevelWeapons = new List<Weapon>();
+    public List<PassiveItems> maxLevelPassiveItems = new List<PassiveItems>();
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -105,5 +109,22 @@ public class PlayerController : MonoBehaviour
         assignedWeapons.Add(weaponToAdd);
         unassignedWeapons.Remove(weaponToAdd);
         EquipmentUI.instance.UpdateSlot(assignedWeapons.Count - 1, assignedWeapons[assignedWeapons.Count - 1].weaponIcon);
+    }
+
+    public void AddPassiveItem(int itemNumber)
+    {
+        if (itemNumber < unassignedPassiveItems.Count)
+        {
+            assignedPassiveItems.Add(unassignedPassiveItems[itemNumber]);
+            unassignedPassiveItems[itemNumber].gameObject.SetActive(true);
+            unassignedPassiveItems.RemoveAt(itemNumber);
+        }
+    }
+
+    public void AddPassiveItem(PassiveItems itemToAdd)
+    {
+        itemToAdd.gameObject.SetActive(true);
+        assignedPassiveItems.Add(itemToAdd);
+        unassignedPassiveItems.Remove(itemToAdd);
     }
 }
