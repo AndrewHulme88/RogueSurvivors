@@ -68,16 +68,19 @@ public class ExperienceLevelController : MonoBehaviour
 
         weaponsToUpgrade.Clear();
         passiveItemsToUpgrade.Clear();
-        List<Weapon> availableWeapons = new List<Weapon>();
-        List<PassiveItems> availablePassiveItems = new List<PassiveItems>();
-        availableWeapons.AddRange(PlayerController.instance.assignedWeapons);
-        availablePassiveItems.AddRange(PlayerController.instance.assignedPassiveItems);
+        //List<Weapon> availableWeapons = new List<Weapon>();
+        //List<PassiveItems> availablePassiveItems = new List<PassiveItems>();
+        //availableWeapons.AddRange(PlayerController.instance.assignedWeapons);
+        //availablePassiveItems.AddRange(PlayerController.instance.assignedPassiveItems);
 
         List<UpgradeOption> upgradePool = new List<UpgradeOption>();
 
         foreach(Weapon weaponOption in PlayerController.instance.assignedWeapons)
         {
-            upgradePool.Add(new UpgradeOption(weaponOption));
+            if(weaponOption.weaponLevel < weaponOption.weaponStats.Count - 1)
+            {
+                upgradePool.Add(new UpgradeOption(weaponOption));
+            }
         }
 
         if(PlayerController.instance.assignedWeapons.Count + PlayerController.instance.maxLevelWeapons.Count < PlayerController.instance.maxWeapons)
@@ -90,7 +93,10 @@ public class ExperienceLevelController : MonoBehaviour
 
         foreach(PassiveItems passiveItemOption in PlayerController.instance.assignedPassiveItems)
         {
-            upgradePool.Add(new UpgradeOption(passiveItemOption));
+            if (passiveItemOption.passiveItemLevel < passiveItemOption.passiveItemStats.Count - 1)
+            {
+                upgradePool.Add(new UpgradeOption(passiveItemOption));
+            }
         }
 
         foreach (PassiveItems passiveItemOption in PlayerController.instance.unassignedPassiveItems)
@@ -131,6 +137,8 @@ public class ExperienceLevelController : MonoBehaviour
         }
 
         PlayerStatsController.instance.UpdateDisplay();
+
+
 
         //if (availableWeapons.Count > 0)
         //{
