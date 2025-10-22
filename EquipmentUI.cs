@@ -6,7 +6,8 @@ public class EquipmentUI : MonoBehaviour
 {
     public static EquipmentUI instance;
 
-    [SerializeField] private List<GameObject> slotParents;
+    [SerializeField] private List<GameObject> weaponSlotParents;
+    [SerializeField] private List<GameObject> passiveSlotParents;
 
     private void Awake()
     {
@@ -20,12 +21,23 @@ public class EquipmentUI : MonoBehaviour
         }
     }
 
-    public void UpdateSlot(int slotIndex, Sprite equipmentIcon)
+    public void UpdateWeaponSlot(int slotIndex, Sprite equipmentIcon)
     {
-        if (slotIndex < 0 || slotIndex >= slotParents.Count) return;
+        if (slotIndex < 0 || slotIndex >= weaponSlotParents.Count) return;
 
-        Image slotImage = slotParents[slotIndex].GetComponent<Image>();
+        Image slotImage = weaponSlotParents[slotIndex].GetComponent<Image>();
 
+        if (slotImage != null)
+        {
+            slotImage.sprite = equipmentIcon;
+            slotImage.enabled = true;
+        }
+    }
+
+    public void UpdatePassiveSlot(int slotIndex, Sprite equipmentIcon)
+    {
+        if (slotIndex < 0 || slotIndex >= passiveSlotParents.Count) return;
+        Image slotImage = passiveSlotParents[slotIndex].GetComponent<Image>();
         if (slotImage != null)
         {
             slotImage.sprite = equipmentIcon;

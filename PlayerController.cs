@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
             AddWeapon(Random.Range(0, unassignedWeapons.Count));
         }
 
-        EquipmentUI.instance.UpdateSlot(assignedWeapons.Count - 1, assignedWeapons[assignedWeapons.Count - 1].weaponIcon);
+        EquipmentUI.instance.UpdateWeaponSlot(assignedWeapons.Count - 1, assignedWeapons[assignedWeapons.Count - 1].weaponIcon);
     }
 
     void Update()
@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
             assignedWeapons.Add(unassignedWeapons[weaponNumber]);
             unassignedWeapons[weaponNumber].gameObject.SetActive(true);
             unassignedWeapons.RemoveAt(weaponNumber);
-            EquipmentUI.instance.UpdateSlot(assignedWeapons.Count - 1, assignedWeapons[assignedWeapons.Count - 1].weaponIcon);
+            EquipmentUI.instance.UpdateWeaponSlot(assignedWeapons.Count - 1, assignedWeapons[assignedWeapons.Count - 1].weaponIcon);
         }
     }
 
@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
         weaponToAdd.gameObject.SetActive(true);
         assignedWeapons.Add(weaponToAdd);
         unassignedWeapons.Remove(weaponToAdd);
-        EquipmentUI.instance.UpdateSlot(assignedWeapons.Count - 1, assignedWeapons[assignedWeapons.Count - 1].weaponIcon);
+        EquipmentUI.instance.UpdateWeaponSlot(assignedWeapons.Count - 1, assignedWeapons[assignedWeapons.Count - 1].weaponIcon);
     }
 
     public void AddPassiveItem(int itemNumber)
@@ -118,6 +118,7 @@ public class PlayerController : MonoBehaviour
             assignedPassiveItems.Add(unassignedPassiveItems[itemNumber]);
             unassignedPassiveItems[itemNumber].gameObject.SetActive(true);
             unassignedPassiveItems.RemoveAt(itemNumber);
+            EquipmentUI.instance.UpdatePassiveSlot(assignedPassiveItems.Count - 1, assignedPassiveItems[assignedPassiveItems.Count - 1].passiveItemIcon);
         }
     }
 
@@ -126,5 +127,6 @@ public class PlayerController : MonoBehaviour
         itemToAdd.gameObject.SetActive(true);
         assignedPassiveItems.Add(itemToAdd);
         unassignedPassiveItems.Remove(itemToAdd);
+        EquipmentUI.instance.UpdatePassiveSlot(assignedPassiveItems.Count - 1, assignedPassiveItems[assignedPassiveItems.Count - 1].passiveItemIcon);
     }
 }
