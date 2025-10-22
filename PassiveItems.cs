@@ -32,5 +32,6 @@ public class PassiveItemStats
 {
     public float moveSpeedIncrease;
     public float expGainIncrease;
+    public float pickupRangeIncrease;
     public string upgradeDescription;
 }
