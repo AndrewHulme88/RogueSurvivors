@@ -37,7 +37,7 @@ public class ExperienceLevelController : MonoBehaviour
 
     public void AddExperience(int amount)
     {
-        currentExperience += amount;
+        currentExperience += (int)(amount * PlayerController.instance.expGain);
         
         if(currentExperience >= expLevels[currentLevel])
         {

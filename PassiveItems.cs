@@ -31,5 +31,6 @@ public class PassiveItems : MonoBehaviour
 public class PassiveItemStats
 {
     public float moveSpeedIncrease;
+    public float expGainIncrease;
     public string upgradeDescription;
 }

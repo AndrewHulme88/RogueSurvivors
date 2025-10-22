@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public int maxPassiveItems = 3;
     public float maxSanity = 100f;
     public float sanityDecreaseRate = 2f;
-    public int expGain = 1;
+    public float expGain = 1;
 
     [HideInInspector]
     public List<Weapon> maxLevelWeapons = new List<Weapon>();
