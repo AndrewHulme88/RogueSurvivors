@@ -35,5 +35,6 @@ public class PassiveItemStats
     public float pickupRangeIncrease;
     public float maxHealthIncrease;
     public float coinGainIncrease;
+    public float hpRegenIncrease;
     public string upgradeDescription;
 }

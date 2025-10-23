@@ -10,6 +10,7 @@ public class PlayerHealthController : MonoBehaviour
 
     public float maxHealth = 100f;
     public float currentHealth;
+    public float healthRegenRate = 0f;
 
     private void Awake()
     {
@@ -28,6 +29,14 @@ public class PlayerHealthController : MonoBehaviour
         currentHealth = maxHealth;
         healthBarSlider.maxValue = maxHealth;
         healthBarSlider.value = currentHealth;
+    }
+
+    private void Update()
+    {
+        if (currentHealth < maxHealth && healthRegenRate > 0f)
+        {
+            Heal(healthRegenRate * Time.deltaTime);
+        }
     }
 
     public void Heal(float healAmount)
