@@ -9,6 +9,7 @@ public class CoinController : MonoBehaviour
     [SerializeField] private float coinSpawnOffsetY = 0.1f;
 
     public int currentCoins = 0;
+    public float coinGainMultiplier = 1f;
 
     private void Awake()
     {
@@ -24,7 +25,7 @@ public class CoinController : MonoBehaviour
 
     public void AddCoins(int amount)
     {
-        currentCoins += amount;
+        currentCoins += (int)(amount * coinGainMultiplier);
         UIController.instance.UpdateCoins(currentCoins);
         SFXManager.instance.PlaySoundEffectPitched(2);
     }

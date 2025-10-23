@@ -18,6 +18,6 @@ public class ExpBoostPassive : PassiveItems
 
     public void SetStats()
     {
-        PlayerController.instance.expGain += passiveItemStats[passiveItemLevel].expGainIncrease;
+        PlayerController.instance.expGain *= passiveItemStats[passiveItemLevel].expGainIncrease;
     }
 }

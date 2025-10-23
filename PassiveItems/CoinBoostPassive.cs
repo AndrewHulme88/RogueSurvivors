@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MoveSpeedPassive : PassiveItems
+public class CoinBoostPassive : PassiveItems
 {
     private void Start()
     {
@@ -18,6 +18,6 @@ public class MoveSpeedPassive : PassiveItems
 
     public void SetStats()
     {
-        PlayerController.instance.moveSpeed *= passiveItemStats[passiveItemLevel].moveSpeedIncrease;
+        CoinController.instance.coinGainMultiplier = passiveItemStats[passiveItemLevel].coinGainIncrease;
     }
 }

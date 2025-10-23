@@ -99,9 +99,12 @@ public class ExperienceLevelController : MonoBehaviour
             }
         }
 
-        foreach (PassiveItems passiveItemOption in PlayerController.instance.unassignedPassiveItems)
+        if (PlayerController.instance.assignedPassiveItems.Count + PlayerController.instance.maxLevelPassiveItems.Count < PlayerController.instance.maxPassiveItems)
         {
-            upgradePool.Add(new UpgradeOption(passiveItemOption));
+            foreach (PassiveItems passiveItemOption in PlayerController.instance.unassignedPassiveItems)
+            {
+                upgradePool.Add(new UpgradeOption(passiveItemOption));
+            }
         }
 
         List<UpgradeOption> selectedUpgrades = new List<UpgradeOption>();
